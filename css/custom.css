@@ -1,0 +1,65 @@
+@import "../bootstrap/css/bootstrap.min.css";
+
+body{
+    background-color: rgb(56, 54, 54);
+    color: white;
+    
+}
+
+.mb-1{
+    margin-bottom: 1px;
+}
+
+.container-lg{
+    border: 2px solid #0ee951;
+    border-radius: 10px;
+    max-width: 650px;
+    background-color: #000000; 
+}
+
+.col-9{
+    width:85%;
+    margin-top: 20px;
+    
+}
+
+.col-4{
+    width: 45%;    
+}
+
+.fw-semibold{
+    text-align: center;
+    font-size: 1.2cm;
+    text-decoration:underline
+}
+
+.date{
+    max-width: max-content;
+}
+
+.radio-hand{    
+    cursor: pointer;
+}
+
+.row{
+    align-items: center;
+}
+
+.btn-outline-success{
+    margin-top: -20px;
+    margin-bottom: 10px;
+    --bs-btn-color: #000000da;
+    --bs-btn-border-width: 2px;    
+    --bs-btn-border-color: #0ee951;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0ee951;
+    --bs-btn-active-border-color: #0ee951; 
+    --bs-btn-hover-color: #0ee951;
+    --bs-btn-hover-bg: #000000;
+    --bs-btn-hover-border-color: #0ee951;                       
+}
+
+.error{
+    color: rgb(255, 0, 0);
+    font-size: small;
+}

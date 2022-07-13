@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <h1 class="fw-semibold">Cadastro</h1>
+    <div class="container-lg">
+        <!-- <form id="formCadastro" action="" method=""> -->
+        <form id="formCadastro">
+            <div class="row justify-content-center">
+                <div class="col-9">
+                    <div class="mb-1">
+                        <label id="lblNome" for="nome" class="form-label">Nome: </label>
+                            <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome.">
+                    </div>
+                    <div class="mb-1">
+                        <label id="lblCPF" for="cpf" class="form-label">CPF: </label>
+                            <input type="text" id="cpf" name="cpf" class="form-control" onkeypress="$(this).mask('000.000.000-00')" placeholder="Digite seu CPF. (Exemplo: 000.000.000-00)" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}">
+                    </div>
+                    <div class="mb-1">
+                        <label id="lblEmail" for="email" class="form-label">E-mail: </label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="Digite seu email.">
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col-4 mb-1">                            
+                            <label id="lblDate" for="date" class="form-label">Data de Nascimento: </label>
+                            <input type="date" id="date" name="date" class="form-control date">
+                        </div>
+                        <div class="col-4 mb-1">
+                            <label id="Genero" class="form-label">Genero: </label> 
+                            <br>
+                            Masculino<input type="radio" id="gen" name="genero" class="radio-hand" value="Masculino">
+                            <br>
+                            Feminino<input type="radio" id="gen2" name="genero" class="radio-hand" value="Feminino">
+                        </div>
+                    </div> 
+
+                    <div class="mb-1">
+                        <label id="lblSsenha" for="senha" class="form-label">Digite sua senha: </label>
+                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha." class="form-control">
+                    </div>
+                    <div class="mb-1">
+                        <label id="lblConfirmSenha" for="confirma_senha" class="form-label">Digite sua senha novamente: </label>
+                            <input type="password" id="confirma_senha" name="confirma_senha" placeholder="Digite sua senha novamente." class="form-control">
+                    </div>
+                    <br>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-1">
+                        <button type="reset" id="cancelar" name="btn_cancelar" class="btn btn-light btn-outline-success" onclick="validar">Cancelar</button>
+                        <button type="submit" id="cadastrar" name="btn_cadastrar" class="btn btn-light btn-outline-success" onclick="">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="bootstrap/js/scripts.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jQuery-Mask/dist/jquery.mask.min.js"></script>
+    <script src="bootstrap/js/jquery.validate.js"></script>
+    <script src="bootstrap/js/additional-methods.js"></script>
+    <script src="bootstrap/js/localization/messages_pt_BR.js"></script>
+    
+    <script>                              
+        $("#formCadastro").validate({
+            rules:{
+                nome:{
+                    required: true
+                },
+                cpf:{
+                    required: true,
+                    cpfBR: true                        
+                },
+                email:{
+                    required: true,
+                    email: true
+                },
+                date:{
+                    required: true,                                                                                                            
+                },
+                genero:{
+                    required: true                                        
+                },                   
+                senha:{
+                    required: true,
+                },
+                confirma_senha:{
+                    required: true,
+                    equalTo: '#senha'
+                }            
+            }                
+        })                                 
+    </script>    
+    <script>
+        $("#cadastrar").click(function(){
+            var validator = $( "#formCadastro" ).validate()
+            if(validator.form())
+                alert('Cadastro enviado')
+            else
+                alert('Preencha os campos corretamente  ')
+        })
+    </script>
+    <script>
+        $("#nome").on("input", function(){
+            var letters = /[^a-zA-Z´ ]/
+            if(this.value.match(letters)){
+                $(this).val(this.value.replace(letters, ''))
+            }            
+        })
+
+        $("#date").on("input", function(){
+            var data = document.getElementById("date").value
+            data = data.replace(/\//g, "-")            
+            var hoje = new Date()
+            var nasc = new Date(data)
+            var idade = hoje.getFullYear() - nasc.getFullYear()
+            var mes = hoje.getMonth() - nasc.getMonth()
+            if(mes < 0 || (mes === 0 && hoje.getDate() < nasc.getDate()))
+                idade--
+
+            if(idade < 18) {
+                alert("Menor de idade.")                          
+                var mod = document.getElementById('date')
+                mod.value = 'yyyy-mm-dd'
+                
+            }
+        })
+    </script>
+</body>
+</html>
